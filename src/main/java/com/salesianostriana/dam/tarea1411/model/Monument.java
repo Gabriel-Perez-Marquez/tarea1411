@@ -19,7 +19,8 @@ public class Monument {
     private String countryCode;
     private String countryName;
     private String cityName;
-    private String location;
+    private double latitude;
+    private double longitude;
     private String monumentName;
     private String monumentDescription;
     private String urlImage;
