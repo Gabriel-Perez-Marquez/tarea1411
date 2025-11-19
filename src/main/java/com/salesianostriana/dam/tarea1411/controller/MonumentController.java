@@ -113,6 +113,16 @@ public class MonumentController {
 
     @PutMapping("/update/{id}")
     @Operation(summary = "Editar un monumento existente")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Monumento modificado con exito", content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = Monument.class)
+            )),
+            @ApiResponse(responseCode = "404", description = "Error al modificar el monumento", content = @Content(
+                    mediaType = "applicatio/json",
+                    schema = @Schema(implementation = ProblemDetail.class)
+            ))
+    })
     public ResponseEntity<String> updateMonument(@PathVariable Long id, Monument monument) {
         try {
             if (!monumentRepository.existsById(id)) {
@@ -130,6 +140,16 @@ public class MonumentController {
 
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Eliminar un monumento por su ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Monumento eliminado con exito", content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = Monument.class)
+            )),
+            @ApiResponse(responseCode = "404", description = "Error al eliminar el monumento", content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = ProblemDetail.class)
+            ))
+    })
     public ResponseEntity<String> deleteMonument(@PathVariable Long id) {
         if (monumentRepository.existsById(id)) {
             monumentRepository.deleteById(id);
